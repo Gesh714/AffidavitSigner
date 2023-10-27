@@ -16,6 +16,7 @@
             <div class="card-body">
                 <h3 class="card-title">Revisión de Declaración Jurada</h3>
                 <!-- Coloca aquí el contenido para revisar la declaración jurada -->
+                <iframe src="{{ url_for('static', filename='declaracion_jurada.pdf') }}" width="100%" height="600px"></iframe>
             </div>
         </div>
 
@@ -23,30 +24,40 @@
         <div class="card my-4">
             <div class="card-body">
                 <h3 class="card-title">Cargar Imágenes de la Cédula de Identidad</h3>
+              <form enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="img_frontal">Cara Frontal:</label>
+                    <input type="file" class="form-control-file" id="img_frontal" name="img_frontal">
+                </div>
+                <div class="form-group">
+                    <label for="img_posterior">Cara posterior:</label>
+                    <input type="file" class="form-control-file" id="img_posterior" name="img_posterior">
+                </div>
                 <!-- Coloca aquí el contenido para cargar las imágenes de la cédula de identidad -->
             </div>
         </div>
 
-        <!-- Botón para Firmar -->
-        <button class="btn btn-primary my-4" data-toggle="modal" data-target="#myModal">Firmar</button>
-    </div>
+      <!-- Botón para Firmar -->
+      <button class="btn btn-primary my-4" data-toggle="modal" data-target="#myModal">Firmar</button>
 
-    <!-- Modal para ingresar nombre completo -->
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="myModalLabel">Ingrese su nombre completo</h4>
-                </div>
-                <div class="modal-body">
-                    <input type="text" class="form-control" placeholder="Nombre completo">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Confirmar</button>
-                </div>
-            </div>
-        </div>
-    </div>
+      <!-- Modal para ingresar nombre completo -->
+      <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                  <form action="{{ url_for('firmar') }}" method="post">
+                      <div class="modal-header">
+                          <h4 class="modal-title" id="myModalLabel">Ingrese su nombre completo</h4>
+                      </div>
+                      <div class="modal-body">
+                          <input type="text" class="form-control" placeholder="Nombre completo" name="nombre">
+                      </div>
+                      <div class="modal-footer">
+                          <button type="submit" class="btn btn-primary">Confirmar</button>
+                      </div>
+                  </form>
+              </div>
+          </div>
+      </div>
 
     <!-- Página de Firma Exitosa (simulada) -->
     <div class="container text-center my-4">
